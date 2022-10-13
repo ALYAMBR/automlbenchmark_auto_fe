@@ -11,6 +11,7 @@ my_*
 __pycache__
 .python-version
 venv/
+venv_fe_dr_research/
 
 # editors/IDEs
 .idea/
