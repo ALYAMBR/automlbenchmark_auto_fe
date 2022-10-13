@@ -4,35 +4,35 @@
 #
 #    pip-compile requirements.in
 #
-boto3==1.17.74
+boto3
     # via -r requirements.in
-botocore==1.20.74
+botocore
     # via
     #   boto3
     #   s3transfer
-certifi==2020.12.5
+certifi
     # via
     #   minio
     #   requests
-chardet==4.0.0
+chardet
     # via requests
-idna==2.10
+idna
     # via requests
-jmespath==0.10.0
+jmespath
     # via
     #   boto3
     #   botocore
-joblib==1.0.1
+joblib
     # via scikit-learn
-liac-arff==2.5.0
+liac-arff
     # via
     #   -r requirements.in
     #   openml
-minio==7.0.3
+minio
     # via openml
-numexpr==2.7.3
+numexpr
     # via tables
-numpy==1.20.3
+numpy
     # via
     #   -r requirements.in
     #   numexpr
@@ -42,51 +42,51 @@ numpy==1.20.3
     #   scikit-learn
     #   scipy
     #   tables
-openml==0.12.2
+openml
     # via -r requirements.in
-pandas==1.2.4
+pandas
     # via
     #   -r requirements.in
     #   openml
-psutil==5.8.0
+psutil
     # via -r requirements.in
-pyarrow==4.0.0
+pyarrow
     # via
     #   -r requirements.in
     #   openml
-python-dateutil==2.8.1
+python-dateutil
     # via
     #   botocore
     #   openml
     #   pandas
-pytz==2021.1
+pytz
     # via pandas
-requests==2.25.1
+requests
     # via openml
-ruamel.yaml.clib==0.2.2
+ruamel.yaml.clib
     # via ruamel.yaml
-ruamel.yaml==0.17.4
+ruamel.yaml
     # via -r requirements.in
-s3transfer==0.4.2
+s3transfer
     # via boto3
-scikit-learn==0.24.2
+scikit-learn
     # via
     #   -r requirements.in
     #   openml
-scipy==1.6.3
+scipy
     # via
     #   openml
     #   scikit-learn
-six==1.16.0
+six
     # via python-dateutil
-tables==3.6.1
+tables
     # via -r requirements.in
-threadpoolctl==2.1.0
+threadpoolctl
     # via scikit-learn
-urllib3==1.26.4
+urllib3
     # via
     #   botocore
     #   minio
     #   requests
-xmltodict==0.12.0
+xmltodict
     # via openml
