@@ -208,6 +208,11 @@ DecisionTree:
     A simple decision tree implementation (scikit-learn) used for testing or as a reference base.
   project: https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
 
+TestCustomFramework:
+  version: 'stable'
+  desctiption: |
+    Testing a creating of a custom framework in AutoML Benchmark.
+
 RandomForest:
   version: 'stable'
   description: |
