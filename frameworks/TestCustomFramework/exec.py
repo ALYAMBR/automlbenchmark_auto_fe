@@ -1,9 +1,9 @@
 import logging
 
 import sklearn
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.preprocessing import StandardScaler
+from frameworks.TestCustomFramework.fc_cycle import construct_features
 
 import numpy as np
 from amlb.benchmark import TaskConfig
@@ -24,16 +24,29 @@ def run(dataset: Dataset, config: TaskConfig):
     y_train, y_test = unsparsify(dataset.train.y_enc, dataset.test.y_enc, fmt='array')
 
     # feature construction code
-    lda = LinearDiscriminantAnalysis(n_components=1)
-    lda = lda.fit(X_train, y_train)
+    # BASELINE
+    # lda = LinearDiscriminantAnalysis(n_components=1)
+    # lda = lda.fit(X_train, y_train)
 
-    log.info(X_train.shape)
-    X_train = np.concatenate((X_train, lda.transform(X_train)), axis=1)
-    X_test = np.concatenate((X_test, lda.transform(X_test)), axis=1)
-    log.info(X_train.shape)
+    # log.info(X_train.shape)
+    # X_train = np.concatenate((X_train, lda.transform(X_train)), axis=1)
+    # X_test = np.concatenate((X_test, lda.transform(X_test)), axis=1)
+    # log.info(X_train.shape)
+    #
+    #FC cycle
+    X_train, fitted_fc_models = construct_features(X_train, y_train, None)
+    print("Train:")
+    print(X_train.shape)
+    X_test, _ = construct_features(X_test, None, fitted_fc_models)
+    print("Test:")
+    print(X_test.shape)
     # --------------------------
 
-    estimator = LogisticRegression if is_classification else LinearRegression
+    scaler = StandardScaler().fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    estimator =  LogisticRegression if is_classification else LinearRegression
     predictor = estimator(random_state=config.seed, **config.framework_params)
 
     with Timer() as training:

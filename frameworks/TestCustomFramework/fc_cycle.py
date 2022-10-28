@@ -1,5 +1,10 @@
-from automlbenchmark_auto_fe.frameworks.TestCustomFramework.config import FCAlgos
-import config
+from frameworks.TestCustomFramework.config import FCAlgos
+from frameworks.TestCustomFramework.config import feature_construction_order_0
+from frameworks.TestCustomFramework.config import feature_construction_order_1
+from frameworks.TestCustomFramework.config import feature_construction_order_2
+from frameworks.TestCustomFramework.config import feature_construction_order_3
+from frameworks.TestCustomFramework.config import feature_construction_order_4
+from frameworks.TestCustomFramework.config import feature_construction_order_5
 import numpy as np
 from sklearn.neighbors import NeighborhoodComponentsAnalysis
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -15,13 +20,17 @@ def get_model_by_name(model_name, num_feats):
         return PLSCanonical(n_components=num_feats)
 
 
-def construct_features(x, y, fitted_models=None):
+def construct_features(x, y=None, fitted_models=None):
     fitted_algos = [] if fitted_models is None else fitted_models
     
-    for alg, num_feats in config.feature_construction_order:
-        model = get_model_by_name(alg, num_feats)
-        model = model.fit(x, y)
-        x = np.concatenate((x, model.transform(x)), axis=1)
-        fitted_algos.append(model)
+    if y is None:
+        for model in fitted_algos:
+            x = np.concatenate((x, model.transform(x)), axis=1)
+    else:
+        for alg, num_feats in feature_construction_order_0:
+            model = get_model_by_name(alg, num_feats)
+            model = model.fit(x, y)
+            x = np.concatenate((x, model.transform(x)), axis=1)
+            fitted_algos.append(model)
 
     return x, fitted_algos
