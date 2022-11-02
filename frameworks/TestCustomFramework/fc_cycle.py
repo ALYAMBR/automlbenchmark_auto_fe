@@ -27,7 +27,7 @@ def construct_features(x, y=None, fitted_models=None):
         for model in fitted_algos:
             x = np.concatenate((x, model.transform(x)), axis=1)
     else:
-        for alg, num_feats in feature_construction_order_2:
+        for alg, num_feats in feature_construction_order_3: # TODO execute experiment with config 3
             model = get_model_by_name(alg, num_feats)
             model = model.fit(x, y)
             x = np.concatenate((x, model.transform(x)), axis=1)
