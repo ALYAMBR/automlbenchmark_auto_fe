@@ -1,0 +1,25 @@
+---
+
+- name: bank_marketing
+  openml_task_id: 9899
+
+- name: bioresponse
+  openml_task_id: 14966
+
+- name: christine
+  openml_task_id: 168908
+
+- name: diabetes
+  openml_task_id: 37
+
+- name: ionosphere
+  openml_task_id: 57
+
+- name: sonar
+  openml_task_id: 39
+
+- name: steel_plates_fault
+  openml_task_id: 9967
+
+- name: qsar_biodeg
+  openml_task_id: 9957

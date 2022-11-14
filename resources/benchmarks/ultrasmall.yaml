@@ -1,0 +1,25 @@
+---
+
+- name: madelon
+  openml_task_id: 9976
+
+- name: Australian
+  openml_task_id: 146818
+
+- name: blood-transfusion
+  openml_task_id: 10101
+
+- name: breast_cancer
+  openml_task_id: 52945
+
+- name: car
+  openml_task_id: 146821
+
+- name: credit-g
+  openml_task_id: 31
+
+- name: kc1
+  openml_task_id: 3917
+
+- name: vehicle
+  openml_task_id: 53

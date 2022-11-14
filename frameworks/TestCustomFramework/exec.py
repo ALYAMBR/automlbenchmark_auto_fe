@@ -1,23 +1,22 @@
 import logging
 
 import sklearn
-from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from xgboost import XGBClassifier, XGBRegressor
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.preprocessing import StandardScaler
-from frameworks.TestCustomFramework.fc_cycle import construct_features
 
-import numpy as np
 from amlb.benchmark import TaskConfig
 from amlb.data import Dataset
 from amlb.datautils import impute_array
 from amlb.results import save_predictions
 from amlb.utils import Timer, unsparsify
+from frameworks.TestCustomFramework.fc_cycle import construct_features
 
 log = logging.getLogger(__name__)
 
 
 def run(dataset: Dataset, config: TaskConfig):
-    log.info(f"\n**** Decision tree[sklearn v{sklearn.__version__}] ****\n")
+    log.info(f"\n**** Custom framework[sklearn v{sklearn.__version__}] ****\n")
 
     is_classification = config.type == 'classification'
 
@@ -35,19 +34,22 @@ def run(dataset: Dataset, config: TaskConfig):
     # log.info(X_train.shape)
     #
     #FC cycle
-    # X_train, fitted_fc_models = construct_features(X_train, y_train, None)
-    # print("Train:")
-    # print(X_train.shape)
-    # X_test, _ = construct_features(X_test, None, fitted_fc_models)
-    # print("Test:")
-    # print(X_test.shape)
+    X_train, fitted_fc_models = construct_features(X_train, y_train, None, return_only_constructed=False)
+    print("Train:")
+    print(X_train.shape)
+    X_test, _ = construct_features(X_test, None, fitted_fc_models, return_only_constructed=False)
+    print("Test:")
+    print(X_test.shape)
     # --------------------------
+    # Command to run: python runbenchmark.py TestCustomFramework ultrasmall 1h12c
+    #
 
     scaler = StandardScaler().fit(X_train)
     X_train = scaler.transform(X_train)
     X_test = scaler.transform(X_test)
 
-    estimator =  DecisionTreeClassifier if is_classification else DecisionTreeRegressor
+    estimator = XGBClassifier if is_classification else XGBRegressor
+    # estimator =  DecisionTreeClassifier if is_classification else DecisionTreeRegressor
     predictor = estimator(random_state=config.seed, **config.framework_params)
 
     with Timer() as training:
