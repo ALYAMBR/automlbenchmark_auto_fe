@@ -1,9 +1,12 @@
 import logging
 
 import sklearn
+import numpy as np
 from xgboost import XGBClassifier, XGBRegressor
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import mutual_info_classif as MIC
+from sklearn.feature_selection import SelectKBest
 
 from amlb.benchmark import TaskConfig
 from amlb.data import Dataset
@@ -41,12 +44,26 @@ def run(dataset: Dataset, config: TaskConfig):
     print("Test:")
     print(X_test.shape)
     # --------------------------
-    # Command to run: python runbenchmark.py TestCustomFramework ultrasmall 1h12c
-    #
-
     scaler = StandardScaler().fit(X_train)
     X_train = scaler.transform(X_train)
     X_test = scaler.transform(X_test)
+    # Feature selection mutual information
+    # mi_score = MIC(X_train, y_train)
+    # print(mi_score)
+    # mi_score_selected_index = np.where(mi_score > 0.2)[0]
+    # X_train = X_train[:, mi_score_selected_index]
+    # X_test = X_test[:, mi_score_selected_index]
+
+    # Feature selection KBest
+    # selector = SelectKBest(MIC, k=min(28, X_train.shape[1]))
+    # selector = selector.fit(X_train, y_train)
+    # X_train = selector.transform(X_train)
+    # X_test = selector.transform(X_test)
+    # print("Train selected:")
+    # print(X_train.shape)
+    # --------------------------
+    # Command to run: python runbenchmark.py TestCustomFramework ultrasmall 1h12c
+    #
 
     estimator = XGBClassifier if is_classification else XGBRegressor
     # estimator =  DecisionTreeClassifier if is_classification else DecisionTreeRegressor

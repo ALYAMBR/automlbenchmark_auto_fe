@@ -17,6 +17,12 @@ feature_construction_order_1 = [
     (FCAlgos.FC_LDA, 1),
 ]
 
+feature_construction_order_1_5_features = [
+    (FCAlgos.FC_NEIGHBORS, 3),
+    (FCAlgos.FC_PLS, 1),
+    (FCAlgos.FC_LDA, 1),
+]
+
 feature_construction_order_2 = [
     (FCAlgos.FC_LDA, 1),
     (FCAlgos.FC_NEIGHBORS, 1),
@@ -39,4 +45,10 @@ feature_construction_order_5 = [
     (FCAlgos.FC_PLS, 1),
     (FCAlgos.FC_LDA, 1),
     (FCAlgos.FC_NEIGHBORS, 1),
+]
+
+feature_construction_order_5_5_features = [
+    (FCAlgos.FC_PLS, 1),
+    (FCAlgos.FC_LDA, 1),
+    (FCAlgos.FC_NEIGHBORS, 3),
 ]

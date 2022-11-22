@@ -1,8 +1,5 @@
 ---
 
-- name: madelon
-  openml_task_id: 9976
-
 - name: Australian
   openml_task_id: 146818
 

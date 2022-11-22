@@ -5,6 +5,10 @@ from frameworks.TestCustomFramework.config import feature_construction_order_2
 from frameworks.TestCustomFramework.config import feature_construction_order_3
 from frameworks.TestCustomFramework.config import feature_construction_order_4
 from frameworks.TestCustomFramework.config import feature_construction_order_5
+from frameworks.TestCustomFramework.config import feature_construction_order_1_5_features
+from frameworks.TestCustomFramework.config import feature_construction_order_5_5_features
+
+
 import numpy as np
 from sklearn.neighbors import NeighborhoodComponentsAnalysis
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -32,7 +36,7 @@ def construct_features(x, y=None, fitted_models=None, return_only_constructed=Fa
             else:
                 x = np.concatenate((x, model.transform(x)), axis=1)
     else:
-        for alg, num_feats in feature_construction_order_1:
+        for alg, num_feats in feature_construction_order_5_5_features:
             print("Using model that is training now.")
             model = get_model_by_name(alg, num_feats)
             model = model.fit(x, y)

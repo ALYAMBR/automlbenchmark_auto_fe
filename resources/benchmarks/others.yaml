@@ -1,5 +1,8 @@
 ---
 
+- name: madelon
+  openml_task_id: 9976
+  
 - name: bank_marketing
   openml_task_id: 9899
 
